@@ -51,18 +51,14 @@ cd $HOME && git clone https://github.com/saman9074/ArcaneTeamBot.git && cd Arcan
 
 * * *
 
-# Support and Development
 
-More information [Beyond Global Chat](https://telegram.me/joinchat/AAAAAEIDQ8HTjezV4syUSA)
+
+
 
 # Special thanks to
 [@MrHalix](https://github.com/MrHalix)
 
 [@Vysheng](https://github.com/vysheng)
-
-* * *
-
-# Developers!
 
 [SoLiD](https://github.com/solid021) ([Telegram](https://telegram.me/SoLiD))
 
@@ -70,11 +66,21 @@ More information [Beyond Global Chat](https://telegram.me/joinchat/AAAAAEIDQ8HT
 
 [MAKAN](https://github.com/makanj) ([Telegram](https://telegram.me/MAKAN))
 
+* * *
+
+# Developers!
+
+[aliabdi](https://github.com/saman9074) ([Telegram](https://telegram.me/saman9074))
+
+
+
+
+
 
 ### Our Telegram channel:
 
-[@BeyondTeam](https://telegram.me/BeyondTeam)
+[@arcaneteam](https://telegram.me/arcaneteam)
 
 ### Our Web Site:
 
-[Beyond Development Forum](https://Beyond-Dev.iR)
+[ArcaneTeam](https://arcaneteam.com)
