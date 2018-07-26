@@ -87,7 +87,8 @@ function create_config( )
 		"msg-checks",
 		"plugins",
 		"tools",
-		"fun",
+		"AutoLock",
+			
 
 	},
     sudo_users = {122630959, 55670780, sudo_id},
