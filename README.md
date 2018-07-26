@@ -29,24 +29,24 @@ cd luarocks-2.2.2
 sudo luarocks install luasec && sudo luarocks install luasocket && sudo luarocks install redis-lua && sudo luarocks install lua-term && sudo luarocks install serpent && sudo luarocks install lua-cjson && sudo luarocks install Lua-cURL
 git clone https://github.com/saman9074/ArcaneTeamBot.git
 cd ArcaneTeamBot
-chmod +x beyond.sh
-./beyond.sh install
-./beyond.sh 
+chmod +x arc.sh
+./arc.sh install
+./arc.sh 
 # Enter a phone number & confirmation code.
 
 # For Auto Launch:
-cd BDReborn
-chmod 777 autobd.sh
-screen ./autobd.sh
+cd ArcaneTeamBot
+chmod 777 autoarc.sh
+screen ./autoarc.sh
 ```
 ### One command
 To install everything in one command, use:
 ```sh
-cd $HOME && git clone https://github.com/saman9074/ArcaneTeamBot.git && cd ArcaneTeamBot && chmod +x beyond.sh && ./beyond.sh install && ./beyond.sh
+cd $HOME && git clone https://github.com/saman9074/ArcaneTeamBot.git && cd ArcaneTeamBot && chmod +x arc.sh && ./arc.sh install && ./arc.sh
 
 OR
 
-cd $HOME && git clone https://github.com/saman9074/ArcaneTeamBot.git && cd ArcaneTeamBot && chmod +x beyond.sh && ./beyond.sh install && chmod 777 autobd.sh && screen ./autobd.sh
+cd $HOME && git clone https://github.com/saman9074/ArcaneTeamBot.git && cd ArcaneTeamBot && chmod +x arc.sh && ./arc.sh install && chmod 777 autoarc.sh && screen ./autoarc.sh
 ```
 
 * * *
