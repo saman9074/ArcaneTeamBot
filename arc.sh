@@ -21,25 +21,24 @@ install() {
 		cd ..
 		chmod +x bot
 		chmod +x tg
-		chmod +x autoarc.sh
+		chmod +x autobd.sh
 }
 
-                                               
-
 function print_logo() {
-
-	green "	   \                      __ __|               "
-	green "	  _ \   _|_|  _` |   \   -_) |  -_)  _` |  ` \ "
-	green "	_/  _\_|\__|\__,_|_| _|\___|_|\___|\__,_|_|_|_|"
-        echo -e "\n\e[0m"
+	green "  .--.  .---. .----.  .--.  .-. .-..----..-----..----.  .--.  .-.  .-."
+	green " / {} \ } }}_}| }`-' / {} \ |  \{ |} |__}`-' '-'} |__} / {} \ }  \/  {"
+	green "/  /\  \| } \ | },-./  /\  \| }\  {} '__}  } {  } '__}/  /\  \| {  } |"
+	green "`-'  `-'`-'-' `----'`-'  `-'`-' `-'`----'  `-'  `----'`-'  `-'`-'  `-'"
+	echo -e "\n\e[0m"
 }
 
 function logo_play() {
     declare -A txtlogo
     seconds="0.010"
-    txtlogo[1]= "   \                      __ __|               "
-    txtlogo[2]= "  _ \   _|_|  _` |   \   -_) |  -_)  _` |  ` \ "
-    txtlogo[3]= "_/  _\_|\__|\__,_|_| _|\___|_|\___|\__,_|_|_|_|"
+    txtlogo[1]=" ____  ____     _____"
+    txtlogo[2]="|  _ )|  _ \   |_   _|___ ____   __  __"
+    txtlogo[3]="|  _ \| |_) )    | |/ .__|  _ \_|  \/  |"
+    txtlogo[4]="|____/|____/     |_|\____/\_____|_/\/\_|"
     printf "\e[31m\t"
     for i in ${!txtlogo[@]}; do
         for x in `seq 0 ${#txtlogo[$i]}`; do
@@ -52,7 +51,7 @@ function logo_play() {
 	echo -e "\e[0m"
 }
 
-function ArcaneTeamFunc() {
+function beyondteam() {
 	echo -e "\e[0m"
 	green "     >>>>                       We Are Not Attacker                             "
 	green "     >>>>                       We Are Not Alliance                             "
@@ -78,7 +77,7 @@ update() {
 
 if [ "$1" = "install" ]; then
 	print_logo
-	ArcaneTeamFunc
+	beyondteam
 	logo_play
 	install
   else
@@ -88,7 +87,7 @@ if [ ! -f ./tg/tgcli ]; then
     exit 1
  fi
 	print_logo
-	ArcaneTeamFunc
+	beyondteam
 	logo_play
    #sudo service redis-server restart
    ./tg/tgcli -s ./bot/bot.lua -l 1 -E $@
