@@ -4119,6 +4119,21 @@ _Set Persian/English Language_
 *دستورات [فارسی | انگلیسی]*
 _Set CMD Persian/English Language_
 
+*پاکسازی همه*
+_Delete All message on Group_
+
+*پاکسازی [number]*
+_delete message between 1 and 1000_
+
+*پاکسازی پیام های من*
+_Delete All message on Group for user send this command_
+
+*پاکسازی پیام* `[reply]`
+_Delete All message reply user_
+
+*حذف* `[reply]`
+_Delete Reply message_
+
 *راهنمای ابزار*
 _Show Tools Help_
 
@@ -4280,6 +4295,22 @@ _تنظیم دستورات فارسی_
 
 *تنظیم خوشامد [متن]*
 _ثبت پیام خوش آمد گویی_
+
+
+*پاکسازی همه*
+_پاکسازی تمام پیام های گروه_
+
+*پاکسازی [number]*
+_پاکسازی پیام های گروه به تعداد عدد مشخص (اعداد باید بین 1 تا 1000 باشد_
+
+*پاکسازی پیام های من*
+_پاکسازی پیام های فردی که این دستور را ارسال میکند_
+
+*پاکسازی پیام* `[reply]`
+_پاک نمودن تمامی پبام های کاربری که ریپلای شده_
+
+*حذف* `[reply]`
+_حذف پیام ریپلای شده_
 
 *راهنمای ابزار*
 _نمایش راهنمای ابزار_
