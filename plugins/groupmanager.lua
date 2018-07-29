@@ -3734,6 +3734,9 @@ _Word filter_
 *!unfilter* `[word]`
 _Word unfilter_
 
+*!set badword* 
+_auto very bad word filter _
+
 *!pin* `[reply]`
 _Pin Your Message_
 
@@ -3800,8 +3803,6 @@ _Set CMD Persian/English Language_
 *!helptools*
 _Show Tools Help_
 
-*!helpfun*
-_Show Fun Help_
 
 _You Can Use_ *[!/#]* _To Run The Commands_
 _This Help List Only For_ *Moderators/Owners!*
@@ -3886,6 +3887,9 @@ _فیلتر‌کلمه مورد نظر_
 *!unfilter* `[word]`
 _ازاد کردن کلمه مورد نظر_
 
+*!set badword* 
+_فیلتر کردن کلمات رکیک به صورت خودکار_
+
 *!pin* `[reply]`
 _ربات پیام شمارا در گروه سنجاق خواهد کرد_
 
@@ -3955,8 +3959,6 @@ _تنظیم زبان دستورات ربات به فارسی یا انگلیسی
 *!helptools*
 _نمایش راهنمای ابزار_
 
-*!helpfun*
-_نمایش راهنمای سرگرمی_
 
 _شما میتوانید از [!/#] در اول دستورات برای اجرای آنها بهره بگیرید_
 
@@ -4047,6 +4049,10 @@ _Word filter_
 *حذف فیلتر* `[word]`
 _Word unfilter_
 
+
+*!set badword* 
+_auto filter badword_
+
 *سنجاق* `[reply]`
 _Pin Your Message_
 
@@ -4116,8 +4122,6 @@ _Set CMD Persian/English Language_
 *راهنمای ابزار*
 _Show Tools Help_
 
-*راهنمای سرگرمی*
-_Show Fun Help_
 
 _This Help List Only For_ *Moderators/Owners!*
 _Its Means, Only Group_ *Moderators/Owners* _Can Use It!_
@@ -4201,6 +4205,10 @@ _فیلتر‌کلمه مورد نظر_
 *حذف فیلتر* `[کلمه]`
 _ازاد کردن کلمه مورد نظر_
 
+
+*تنظیم فحش* 
+_فیلتر کردن کلمات رکیک به صورت خودکار_
+
 *سنجاق* `[reply]`
 _ربات پیام شمارا در گروه سنجاق خواهد کرد_
 
@@ -4276,8 +4284,6 @@ _ثبت پیام خوش آمد گویی_
 *راهنمای ابزار*
 _نمایش راهنمای ابزار_
 
-*راهنمای سرگرمی*
-_نمایش راهنمای سرگرمی_
 
 _این راهنما فقط برای مدیران/مالکان گروه میباشد!
 این به این معناست که فقط مدیران/مالکان گروه میتوانند از دستورات بالا استفاده کنند!_
