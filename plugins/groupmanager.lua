@@ -141,7 +141,63 @@ end
          return "_کلمه_ *"..word.."* _به لیست کلمات فیلتر شده اضافه شد_"
     end
 end
+----------------------------------------
+local function filter_word_fosh(msg)
+fosh_filter = 
+{
+    	  "sex",
+	  "gay",
+	  "fuck",
+	  "kir",
+	  "kon",
+	  "kos",
+	  "koos",
+	  "koon",
+	  "jende",
+	  "lez",
+	  "سکس",
+	  "جنده",
+	  "کون",
+	  "کیر",	
+	  "جنده",
+	  "کوص",
+	  "لزبین",	
+	  "مفعول",
+	  "برده",
+	  "فتیش",
+	  "سکسی",
+	  "porn",
+	  "پورن",
+	  "گی",
+	  "برده",
+	  "میسترس",
+	  "mistress",
+	  "اوبی",
+	  "لاشی",
+	  "س ک س",
+	  "گاییدم"
+}
+local hash = "gp_lang:"..msg.to.id
+local lang = redis:get(hash)
+local data = load_data(_config.moderation.data)
 
+local word = "fosh"
+for i = 1, 31 do
+	word = fosh_filter[i]
+  if not data[tostring(msg.to.id)]['filterlist'] then
+    data[tostring(msg.to.id)]['filterlist'] = {}
+    save_data(_config.moderation.data, data)
+    end
+if data[tostring(msg.to.id)]['filterlist'][(word)] then
+   --rerutn nil
+end
+   data[tostring(msg.to.id)]['filterlist'][(word)] = true
+     save_data(_config.moderation.data, data)
+   --return nil
+end -- for
+
+end
+----------------------------------------
 local function unfilter_word(msg, word)
 local hash = "gp_lang:"..msg.to.id
 local lang = redis:get(hash)
@@ -3510,6 +3566,14 @@ end
   if ((matches[1] == 'filter' and not Clang) or (matches[1] == "فیلتر" and Clang)) and is_mod(msg) then
     return filter_word(msg, matches[2])
   end
+  if ((matches[1] == 'set badword' and not Clang) or (matches[1] == "تنظیم فحش" and Clang)) and not matches[2] and is_mod(msg) then
+	if not lang then
+         tdcli.sendMessage(msg.to.id, msg.id_, 1,   "Bad Word _added to filtered words list_", 1, "md") 
+            else
+         tdcli.sendMessage(msg.to.id, msg.id_,1,  "فحش ها به لیست فیلتر اضافه گردید!", 1, "md") 
+    end
+    return filter_word_fosh(msg)
+  end
   if ((matches[1] == 'unfilter' and not Clang) or (matches[1] == "حذف فیلتر" and Clang)) and is_mod(msg) then
     return unfilter_word(msg, matches[2])
   end
@@ -4416,6 +4480,7 @@ patterns ={
 "^([https?://w]*.?telegram.me/joinchat/%S+)$",
 "^[!/#](setwelcome) (.*)",
 "^[!/#](welcome) (.*)$",
+"^[!/#](set badword)$",
 "^(زبان) (.*)$",
 "^(دستورات انگلیسی)$",
 "^(ایدی)$",
@@ -4474,7 +4539,7 @@ patterns ={
 '^(حذف فیلتر) (.*)$',
 '^(خوشامد) (.*)$',
 '^(تنظیم خوشامد) (.*)$',
-
+'^(تنظیم فحش)$',
 
 },
 run=run,
