@@ -1,5 +1,5 @@
--- #Beyond Reborn Robot
--- #@BeyondTeam
+-- #Arcane Team bot
+-- #@ArcaneTeam
 
 tdcli = dofile('./tg/tdcli.lua')
 serpent = (loadfile "./libs/serpent.lua")()
@@ -82,25 +82,37 @@ function create_config( )
   -- A simple config with basic plugins and ourselves as privileged user
 	config = {
     enabled_plugins = {
-		"banhammer",
-		"groupmanager",
 		"msg-checks",
-		"plugins",
-		"tools",
-		"AutoLock",
+    		"plugins",
+    		"warn",
+    		"write",
+    		"tools",
+    		"groupmanager",
+    		"banhammer",
+    		"cbl",
+    		"cda",
+    		"core",
+    		"info",
+    		"status",
+    		"AutoLock",
+    		"delmsgNew"
 			
 
 	},
-    sudo_users = {122630959, 55670780, sudo_id},
+    sudo_users = {122630959, sudo_id},
     admins = {},
     disabled_channels = {},
     moderation = {data = './data/moderation.json'},
-    info_text = [[》ArcaneTeam v1
+    info_text = [[》ArcaneTeamBot v1
 
-》https://github.com/saman9074/ 
+》Developer:
+》https://telegram.me/saman9074
+		
+》source:
+》https://github.com/saman9074/ArcaneTeamBot
 
 》Our website :
-》http://arcaneteam.iR
+》http://arcaneteam.com
 ]],
   }
 	serialize_to_file(config, './data/config.lua')
@@ -142,7 +154,7 @@ function load_plugins()
 			print('\27[31m'..err..'\27[39m')
 		end
 	end
-	print('\n'..#config.enabled_plugins..' Plugins Are Active\n\nStarting BDReborn Robot...\n')
+	print('\n'..#config.enabled_plugins..' Plugins Are Active\n\nStarting ArcaneTeam Robot...\n')
 end
 
 load_plugins()
