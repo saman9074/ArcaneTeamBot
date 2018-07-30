@@ -8,7 +8,39 @@ function exi_files(cpath)
     end
     return files
 end
-
+-------------------------
+local function All_ownerlist(msg)
+local hash = "gp_lang:"..msg.to.id
+local lang = redis:get(hash)
+    local data = load_data(_config.moderation.data)
+    local i = 1
+  if not data[tostring(msg.to.id)] then
+if not lang then
+    return "_Group is not added_"..msg_caption
+else
+return "گروه به لیست گروه های مدیریتی ربات اضافه نشده است"
+  end
+end
+  -- determine if table is empty
+  if next(data[tostring(msg.to.id)]['owners']) == nil then --fix way
+ if not lang then
+    return "_No_ *owner* _in this group_"
+else
+    return "در حال حاضر هیچ مالکی برای گروه انتخاب نشده است"
+  end
+end
+if not lang then
+   message = '*List of moderators :*\n'
+else
+   message = '*لیست مالکین گروه :*\n'
+end
+  for k,v in pairs(data[tostring(msg.to.id)]['owners']) do
+    message = message ..i.. '- '..v..' [' ..k.. '] \n'
+   i = i + 1
+end
+  return message
+end
+-------------------------
 local function file_exi(name, cpath)
     for k,v in pairs(exi_files(cpath)) do
         if name == v then
@@ -126,15 +158,24 @@ local function chat_list(msg)
     end
     local message = 'List of Groups:\n*Use #join (ID) to join*\n\n'
     for k,v in pairsByKeys(data[tostring(groups)]) do
+	
 		local group_id = v
 		if data[tostring(group_id)] then
 			settings = data[tostring(group_id)]['settings']
 		end
+		
+		
+		if data[tostring(group_id)] then
+			for q, w in pairs(data[tostring(group_id)]['owners']) do
+				String_ID = q
+			end
+		end
         for m,n in pairsByKeys(settings) do
+		
 			if m == 'set_name' then
 				name = n:gsub("", "")
 				chat_name = name:gsub("‮", "")
-				group_name_id = name .. '\n(ID: ' ..group_id.. ')\n\n'
+				group_name_id = name .. '\n(ID: ' ..group_id.. ')\n'  .. '(Owner:' .. String_ID .. ')\n\n'
 				if name:match("[\216-\219][\128-\191]") then
 					group_info = i..' - \n'..group_name_id
 				else
@@ -142,7 +183,7 @@ local function chat_list(msg)
 				end
 				i = i + 1
 			end
-        end
+		end
 		message = message..group_info
     end
 	return message
@@ -601,7 +642,7 @@ end
 			return set_config(msg)
 		end
 		if ((matches[1]:lower() == "addsupport") or (matches[1] == "دعوت پشتیبان")) and is_mod(msg) then
-tdcli.sendMessage(-1001388235145, msg.id_, 1,  "شناسه گروه" .. msg.chat_id_ .. "درخواست پشتیبانی دارد.", 1,'md')   
+tdcli.sendMessage(SUDO, msg.id_, 1,  "شناسه گروه" .. msg.chat_id_ .. "درخواست پشتیبانی دارد.", 1,'md')   
 return 'پشتیبان در اولین فرصت وارد گروه می شود.'
 end
 if is_sudo(msg) then
@@ -1168,6 +1209,21 @@ return '_Markread >_ *OFF*'
 return '_تیک دوم >_ *خاموش*'
       end
    end
+end
+if ((matches[1] == 'sendowners' and not Clang) or (matches[1] == "مالکان" and Clang)) and is_sudo(msg) then		
+local data = load_data(_config.moderation.data)		
+local bc = matches[2]			
+for x,v in pairs(data) do	
+for k,v in pairs(data[tostring(x)]['owners']) do
+	--print("****owner:"..k)		
+tdcli.sendMessage(k, 0, 0, bc.."\n", 0)	
+end		
+end	
+end
+
+if ((matches[1] == 'sendowner' and not Clang) or (matches[1] == "سازنده" and Clang)) and matches[2] and matches[3] and is_sudo(msg) then		
+local text = matches[2]
+tdcli.sendMessage(matches[3], 0, 0, text, 0)
 end
 
 if ((matches[1] == 'bc' and not Clang) or (matches[1] == "ارسال" and Clang)) and is_admin(msg) then
@@ -1783,6 +1839,8 @@ patterns = {
 "^[!/#]([Pp]lan) ([123]) (-%d+)$",
 "^[!/#]([Rr]em)$",
 "^[!/#](addsupport)$",
+"^[!/#](sendowners)(.*)$",
+"^[!/#](sendowner)+(.*) (-%d+)$",
 	"^(پیکربندی)$",
 	"^(افزودن)$",
 	"^(حذف گروه)$",
@@ -1827,6 +1885,8 @@ patterns = {
 	"^(پاک کردن حافظه)$",
 	"^(بیوند)$",
 	'^(دعوت پشتیبان)$',
+	'^(مالکان)(.*)$',
+	'^(سازنده) +(.*) (%d+)$',
 }, 
 run = run, pre_process = pre_process
 }
