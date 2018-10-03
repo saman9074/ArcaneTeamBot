@@ -2,6 +2,8 @@
 -- #@ArcaneTeam
 
 tdcli = dofile('./tg/tdcli.lua')
+tdbot_new = dofile('./tg/tdbot.lua')
+tdcli3 = dofile('./tg/tdcli_v3.lua')
 serpent = (loadfile "./libs/serpent.lua")()
 feedparser = (loadfile "./libs/feedparser.lua")()
 require('./bot/utils')
