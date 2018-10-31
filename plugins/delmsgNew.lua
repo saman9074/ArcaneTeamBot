@@ -24,6 +24,31 @@ local function delmsg (GetAndroid,Tarfand)
     tdcli.getChatHistory(Tarfand.messages_[0].chat_id_, Tarfand.messages_[0].id_,0 , 100, delmsg, {msgs=msgs})
 end
 -----------------------------------------
+
+local function info_by_reply(arg, data)
+    if tonumber(data.sender_user_id_) then
+local function info_cb(arg, data)
+---tdcli.sendMessage(arg.chat_id, arg.msgid, 0, "ID" .. data.id_ .. "\n\n", 0, "md")
+   tdcli.deleteMessagesFromUser(arg.chat_id, data.id_, dl_cb, cmd)
+		if not lang then   
+			tdcli.sendMessage(arg.chat_id,arg.msgid, 1, '*Done :)*', 1, 'md')
+		else
+			tdcli.sendMessage(arg.chat_id, arg.msgid, 1, '_انجام شد :)_', 1, 'md')
+		end
+   
+  --text = text..'@ArcaneTeam'
+  --tdcli.sendMessage(arg.chat_id, arg.msgid, 0, text, 0, "md")
+end
+tdcli_function ({
+    ID = "GetUser",
+    user_id_ = data.sender_user_id_
+  }, info_cb, {chat_id=data.chat_id_,user_id=data.sender_user_id_,msgid=data.id_})
+    else
+tdcli.sendMessage(data.chat_id_, "", 0, "*User not found*", 0, "md")
+   end
+end
+
+-----------------------------------------
 local function MrTarfand(msg)
 if ((matches[1] == 'پاکسازی همه' and not Clang) or (matches[1] == "پاک همه" and Clang)) and is_mod(msg) then
   local function pro(extra,result,success)
@@ -74,19 +99,28 @@ tdcli.deleteMessagesFromUser(msg.to.id, msg.sender_user_id_, dl_cb, cmd)
 	 end
 end
 ------------------------------------------
---[[[
+--[[
 if (matches[1]:lower() == "پاکسازی پیام" and not Clang) or (matches[1] == "پاکسازی پیام" and Clang)  and not matches[2] then 
 	if msg.reply_id then 
-		tdcli.deleteMessagesFromUser(msg.to.id, msg.from.reply_id, dl_cb, cmd)
+		tdcli.deleteMessagesFromUser(msg.to.id, msg.reply_id.from, dl_cb, cmd)
 		if not lang then   
 			tdcli.sendMessage(msg.chat_id_, msg.id_, 1, '*Done :)*' .. msg.from.id .. ' ** ' .. msg.from.reply_id, 1, 'md')
 		else
 			tdcli.sendMessage(msg.chat_id_, msg.id_, 1, '_انجام شد :)_', 1, 'md')
 		end
 	end
-end
+end--]]
+if (matches[1]:lower() == "پاکسازی پیام" and not Clang) or (matches[1] == "پاکسازی پیام" and Clang)  and not matches[2] then 
+	if msg.reply_id then 
+		tdcli_function ({
+			ID = "GetMessage",
+			chat_id_ = msg.chat_id_,
+			message_id_ = msg.reply_to_message_id_
+		}, info_by_reply, {chat_id=msg.chat_id_})
+	end
+ end
+  
 ------------------------------------------
---]]
 end
 
 return {  

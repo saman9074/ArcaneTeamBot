@@ -1288,17 +1288,17 @@ end
 local join_req = data[tostring(target)]["settings"]["join_req"] 
 if join_req == "yes" then
 if not lang then
- return "*Join Required* _Is Already Locked_"
+ return "*strict Required* _Is Already Locked_"
 elseif lang then
- return "ادد اجباری هم اکنون فعال است"
+ return "قفل سخت هم اکنون فعال است"
 end
 else
  data[tostring(target)]["settings"]["join_req"] = "yes"
 save_data(_config.moderation.data, data) 
 if not lang then
- return "*Join Required* _Has Been Locked_"
+ return "*strict Required* _Has Been Locked_"
 else
- return "ادد اجباری فعال شد!"
+ return "قفل سخت فعال شد"
 end
 end
 end
@@ -1317,17 +1317,17 @@ end
 local join_req = data[tostring(target)]["settings"]["join_req"]
  if join_req == "no" then
 if not lang then
-return "*Join Required* _Is Not Locked_" 
+return "*strict Required* _Is Not Locked_" 
 elseif lang then
-return "ادد اجباری هم اکنون غیرفعال می باشد!"
+return "قفل سخت هم اکنون نیز غیر فعال است!"
 end
 else 
 data[tostring(target)]["settings"]["join_req"] = "no"
 save_data(_config.moderation.data, data) 
 if not lang then
-return "*Join Required* _Has Been Unlocked_" 
+return "*strict Required* _Has Been Unlocked_" 
 else
-return "ادد اجباری غیرفعال شد!"
+return "قفل سخت غیر فعال شد!"
 end
 end
 end
@@ -1762,10 +1762,10 @@ end
 if not lang then
 
 local settings = data[tostring(target)]["settings"] 
- text = "*Group Settings:*\n_Lock edit :_ *"..settings.lock_edit.."*\n_Lock links :_ *"..settings.lock_link.."*\n_Lock tags :_ *"..settings.lock_tag.."*\n_Lock Join :_ *"..settings.lock_join.."*\n_Lock Join Required :_ *"..settings.join_req.."*\n_Lock flood :_ *"..settings.flood.."*\n_Lock spam :_ *"..settings.lock_spam.."*\n_Lock mention :_ *"..settings.lock_mention.."*\n_Lock arabic :_ *"..settings.lock_arabic.."*\n_Lock webpage :_ *"..settings.lock_webpage.."*\n_Lock markdown :_ *"..settings.lock_markdown.."*\n_Group welcome :_ *"..settings.welcome.."*\n_Lock pin message :_ *"..settings.lock_pin.."*\n_Bots protection :_ *"..settings.lock_bots.."*\n_Flood sensitivity :_ *"..NUM_MSG_MAX.."*\n_Character sensitivity :_ *"..SETCHAR.."*\n_Flood check time :_ *"..TIME_CHECK.."*\n*____________________*\n_Expire Date :_ *"..expire_date.."*\n*Bot channel*: @ArcaneTeam\n*Group Language* : *EN*"
+ text = "*Group Settings:*\n_Lock edit :_ *"..settings.lock_edit.."*\n_Lock links :_ *"..settings.lock_link.."*\n_Lock tags :_ *"..settings.lock_tag.."*\n_Lock strict :_ *"..settings.lock_join.."*\n_Lock Join Required :_ *"..settings.join_req.."*\n_Lock flood :_ *"..settings.flood.."*\n_Lock spam :_ *"..settings.lock_spam.."*\n_Lock mention :_ *"..settings.lock_mention.."*\n_Lock arabic :_ *"..settings.lock_arabic.."*\n_Lock webpage :_ *"..settings.lock_webpage.."*\n_Lock markdown :_ *"..settings.lock_markdown.."*\n_Group welcome :_ *"..settings.welcome.."*\n_Lock pin message :_ *"..settings.lock_pin.."*\n_Bots protection :_ *"..settings.lock_bots.."*\n_Flood sensitivity :_ *"..NUM_MSG_MAX.."*\n_Character sensitivity :_ *"..SETCHAR.."*\n_Flood check time :_ *"..TIME_CHECK.."*\n*____________________*\n_Expire Date :_ *"..expire_date.."*\n*Bot channel*: @ArcaneTeam\n*Group Language* : *EN*"
 else
 local settings = data[tostring(target)]["settings"] 
- text = "*تنظیمات گروه:*\n_قفل ویرایش پیام :_ *"..settings.lock_edit.."*\n_قفل لینک :_ *"..settings.lock_link.."*\n_قفل ورود :_ *"..settings.lock_join.."*\n_ادد اجباری :_ *"..settings.join_req.."*\n_قفل تگ :_ *"..settings.lock_tag.."*\n_قفل پیام مکرر :_ *"..settings.flood.."*\n_قفل هرزنامه :_ *"..settings.lock_spam.."*\n_قفل فراخوانی :_ *"..settings.lock_mention.."*\n_قفل عربی :_ *"..settings.lock_arabic.."*\n_قفل صفحات وب :_ *"..settings.lock_webpage.."*\n_قفل فونت :_ *"..settings.lock_markdown.."*\n_پیام خوشآمد گویی :_ *"..settings.welcome.."*\n_قفل سنجاق کردن :_ *"..settings.lock_pin.."*\n_محافظت در برابر ربات ها :_ *"..settings.lock_bots.."*\n_حداکثر پیام مکرر :_ *"..NUM_MSG_MAX.."*\n_حداکثر حروف مجاز :_ *"..SETCHAR.."*\n_زمان بررسی پیام های مکرر :_ *"..TIME_CHECK.."*\n*____________________*\n_تاریخ انقضا :_ *"..expire_date.."*\n*کانال ما*: @ArcaneTeam\n_زبان سوپرگروه_ : *FA*"
+ text = "*تنظیمات گروه:*\n_قفل ویرایش پیام :_ *"..settings.lock_edit.."*\n_قفل لینک :_ *"..settings.lock_link.."*\n_قفل ورود :_ *"..settings.lock_join.."*\n_قفل سخت :_ *"..settings.join_req.."*\n_قفل تگ :_ *"..settings.lock_tag.."*\n_قفل پیام مکرر :_ *"..settings.flood.."*\n_قفل هرزنامه :_ *"..settings.lock_spam.."*\n_قفل فراخوانی :_ *"..settings.lock_mention.."*\n_قفل عربی :_ *"..settings.lock_arabic.."*\n_قفل صفحات وب :_ *"..settings.lock_webpage.."*\n_قفل فونت :_ *"..settings.lock_markdown.."*\n_پیام خوشآمد گویی :_ *"..settings.welcome.."*\n_قفل سنجاق کردن :_ *"..settings.lock_pin.."*\n_محافظت در برابر ربات ها :_ *"..settings.lock_bots.."*\n_حداکثر پیام مکرر :_ *"..NUM_MSG_MAX.."*\n_حداکثر حروف مجاز :_ *"..SETCHAR.."*\n_زمان بررسی پیام های مکرر :_ *"..TIME_CHECK.."*\n*____________________*\n_تاریخ انقضا :_ *"..expire_date.."*\n*کانال ما*: @ArcaneTeam\n_زبان سوپرگروه_ : *FA*"
 end
 return text
 end
@@ -3070,7 +3070,7 @@ end
 if ((matches[2] == "join" and not Clang) or (matches[2] == "ورود" and Clang)) then
 return lock_join(msg, data, target)
 end
-if ((matches[2] == "joinr" and not Clang) or (matches[2] == "ادداجباری" and Clang)) then
+if ((matches[2] == "strict" and not Clang) or (matches[2] == "سخت" and Clang)) then
 return lock_join_req(msg, data, target)
 end
 end
@@ -3113,7 +3113,7 @@ end
 if ((matches[2] == "join" and not Clang) or (matches[2] == "ورود" and Clang)) then
 return unlock_join(msg, data, target)
 end
-if ((matches[2] == "joinr" and not Clang) or (matches[2] == "ادداجباری" and Clang)) then
+if ((matches[2] == "strict" and not Clang) or (matches[2] == "سخت" and Clang)) then
 return unlock_join_req(msg, data, target)
 end
 end
@@ -4220,7 +4220,6 @@ _فیلتر‌کلمه مورد نظر_
 *حذف فیلتر* `[کلمه]`
 _ازاد کردن کلمه مورد نظر_
 
-
 *تنظیم فحش* 
 _فیلتر کردن کلمات رکیک به صورت خودکار_
 
@@ -4281,17 +4280,11 @@ _تنظیم لینک جدید برای گروه_
 *لینک خصوصی*
 _ارسال لینک گروه به چت خصوصی شما_
 
-*زبان انگلیسی*
-_تنظیم زبان انگلیسی_
+*زبان انگلیسی/فارسی*
+_تنظیم زبان انگلیسی/فارسی_
 
-*زبان فارسی*
-_تنظیم زبان فارسی_
-
-*دستورات انگلیسی*
-_تنظیم دستورات انگلیسی_
-
-*دستورات فارسی*
-_تنظیم دستورات فارسی_
+*دستورات انگلیسی/فارسی*
+_تنظیم دستورات انگلیسی/فارسی_
 
 *تنظیم خوشامد [متن]*
 _ثبت پیام خوش آمد گویی_
@@ -4318,7 +4311,7 @@ _اخطار دادن به کاربر_
 _حذف اخطار_
 
 *حداکثر اخطار [عدد]*
-_تعیین تعداد اخطار ها که در این تعداد کاربر حذف می شود (عدد باید بین 1 تا بین باشد)
+_تعیین تعداد اخطار ها (عدد باید بین 1 تا بین باشد)
 
 *پاک کردن اخطار ها*
 _پاک کردن تمامی اخطار های کاربران گروه_
@@ -4326,12 +4319,7 @@ _پاک کردن تمامی اخطار های کاربران گروه_
 *لیست اخطار*
 _نمایش کاربرانی که اخطار گرفته اند_
 
-*راهنمای ابزار*
-_نمایش راهنمای ابزار_
-
-
 _این راهنما فقط برای مدیران/مالکان گروه میباشد!
-این به این معناست که فقط مدیران/مالکان گروه میتوانند از دستورات بالا استفاده کنند!_
 *موفق باشید ;)*]]
 end
 return text..msg_caption

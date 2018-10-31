@@ -139,10 +139,10 @@ end
 	else
 		lock_join = 'no'
 	end
-	if settings.lock_join_req then
-		lock_join_req = settings.lock_join_req
+	if settings.join_req then
+		join_req = settings.join_req
 	else
-		lock_join_req = 'no'
+		join_req = 'no'
 	end
 	if settings.group_channel then
 		group_channel = settings.group_channel
@@ -226,7 +226,7 @@ end
 	
 	
 if not is_mod(msg) and not is_owner(msg) and not is_admin(msg) and not is_sudo(msg) and not is_whitelist(msg.from.id, msg.to.id) and msg.from.id ~= our_id and text == "left" or text == "kicked" then
-		if lock_join_req == "yes" then
+		if join_req == "yes" then
 			del_msg(chat, tonumber(msg.id))
 			if lang then
 				tdcli.sendMessage(msg.to.id, msg.id, 0, '<b>User ID :</b> <code>'..msg.from.id..'</code>\n<b>Username :</b> '..('@'..msg.from.username or '<i>No Username</i>')..'\n<i>در ابتدا در کانال عضو شوید سپس میتوانید پیام ارسال کنید!</i>' .. '/n کانال ما: @' .. group_channel, 0, "html")
@@ -364,6 +364,9 @@ if link_caption
 and lock_link == "yes" then
  if is_channel then
  del_msg(chat, tonumber(msg.id))
+  if join_req == "yes" then
+	kick_user(user, chat)
+   end
   elseif is_chat then
 kick_user(user, chat)
    end
@@ -417,9 +420,13 @@ if link_msg
 and lock_link == "yes" then
  if is_channel then
  del_msg(chat, tonumber(msg.id))
+ if join_req == "yes" then
+	kick_user(user, chat)
+   end
   elseif is_chat then
 kick_user(user, chat)
    end
+   
 end
 local tag_msg = msg.text:match("@") or msg.text:match("#")
 if tag_msg and lock_tag == "yes" then

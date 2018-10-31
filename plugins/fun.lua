@@ -8,11 +8,65 @@ local function run_bash(str)
     local result = cmd:read('*all')
     return result
 end
+
+function vardump_new(value,chat_id, depth, key)
+  local linePrefix = ''
+  local spaces = ''
+  local text_return = ""
+  if key ~= nil then
+    linePrefix = key .. ' = '
+  end
+
+  if depth == nil then
+    depth = 0
+  else
+    depth = depth + 1
+    for i=1, depth do 
+      spaces = spaces .. '  '
+    end
+  end
+
+  if type(value) == 'table' then
+    mTable = getmetatable(value)
+    if mTable == nil then
+      --print(spaces .. linePrefix .. '(table) ')
+	  text_return = text_return .. spaces .. linePrefix .. '(table)'
+    else
+      --print(spaces .. '(metatable) ')
+	  text_return = text_return .. spaces .. '(metatable) '
+        value = mTable
+    end
+    for tableKey, tableValue in pairs(value) do
+      vardump(tableValue, depth, tableKey)
+    end
+  elseif type(value)  == 'function' or 
+    type(value) == 'thread' or 
+    type(value) == 'userdata' or 
+    value == nil then
+      --print(spaces .. tostring(value))
+	  text_return = text_return .. spaces .. tostring(value)
+  elseif type(value)  == 'string' then
+    --print(spaces .. linePrefix .. '"' .. tostring(value) .. '",')
+	text_return = text_return .. spaces .. linePrefix .. '"' .. tostring(value) .. '",'
+  else
+    --print(spaces .. linePrefix .. tostring(value) .. ',')
+	text_return = text_return .. spaces .. linePrefix .. tostring(value) .. ','
+  end
+  tdcli.sendMessage(chat_id, 0, 1, text_return, 1, 'html')
+  
+end
+
+
+function dl_cb_new(arg, data)
+  vardump_new(arg,-1001176365416, nil, "invite_link_" )
+  vardump_new(data,-1001176365416, nil, "invite_link_" )
+  	--return tdcli.sendMessage(msg.chat_id_, 0, 1, x[invite_link_], 1, 'html')
+end
 --------------------------------
 local api_key = nil
 local base_api = "https://maps.googleapis.com/maps/api"
 
- require("xml2lua")
+ --require("xml2lua")
 --------------------------------
 local function get_latlong(area)
 	local api      = base_api .. "/geocode/json?"
@@ -372,6 +426,11 @@ end
 		tdcli.sendPhoto(msg.to.id, 0, 0, 1, nil, file, msg_caption, dl_cb, nil)
 	end
 
+	if (matches[1]:lower() == 'test' and not Clang) or (matches[1]:lower() == 'تستی' and Clang) then
+		 tdcli3.getChannelFull(msg.to.id, dl_cb_new, nil);
+	end
+	
+	
 
 --------------------------------
 if matches[1] == "helpfun" and not Clang then
@@ -570,10 +629,10 @@ return {
 		"^[!/]([Tt]r) ([^%s]+) (.*)$",
 		"^[!/]([Ss]hort) (.*)$",
 		"^[!/](photo) (.+)$",
-		"^[!/](sticker) (.+)$",]]--
+		"^[!/](sticker) (.+)$",
 		"^[#!/](jokinja)$",
 		"^[#!/](coins)$",
-		"^[#!/](jazbmard)$",
+		"^[#!/](jazbmard)$",]]--
       --[["^(راهنمای سرگرمی)$",
     	--"^(اب و هوا) (.*)$",
 		--"^(ماشین حساب) (.*)$",
@@ -586,13 +645,14 @@ return {
 		--"^(ترجمه) ([^%s]+) (.*)$",
 		--"^(لینک کوتاه) (.*)$",
 		--"^(عکس) (.+)$",
-		--"^(استیکر) (.+)$",--]]
+		--"^(استیکر) (.+)$",
 		"^(ali) (.*)$",
 		"^(علی) (.*)$",
 		"^(جوکاینجا)$",
 		"^(قیمت)$",
 		"^(جذب مردان)$",
-		"^(جوک)$"
+		"^(جوک)$"--]]
+		"^(تستی)$",
 		}, 
 	run = run,
 	}

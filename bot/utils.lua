@@ -1,4 +1,4 @@
---Begin Utils.lua By #BeyondTeam :)
+﻿--Begin Utils.lua By #BeyondTeam :)
  local clock = os.clock
 function sleep(time)  -- seconds
   local t0 = clock()
@@ -707,7 +707,7 @@ local var = false
 local data = load_data(_config.moderation.data)
   if data[tostring(msg.chat_id_)]['filterlist'] then
 for k,v in pairs(data[tostring(msg.chat_id_)]['filterlist']) do 
-    if string.find(string.lower(text), string.lower(k)) then
+    if string.find(string.lower(text), '%s'..string.lower(k)..'%s') or string.find(string.lower(text), '^'..string.lower(k)..'%s') or string.find(string.lower(text), '%s'..string.lower(k)..'$') or string.find(string.lower(text), '^'..string.lower(k)..'$') then
        var = true
         end
      end

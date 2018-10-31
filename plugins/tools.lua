@@ -645,6 +645,41 @@ end
 tdcli.sendMessage(SUDO, msg.id_, 1,  "شناسه گروه" .. msg.chat_id_ .. "درخواست پشتیبانی دارد.", 1,'md')   
 return 'پشتیبان در اولین فرصت وارد گروه می شود.'
 end
+
+if ((matches[1]:lower() == 'autoadd' and not Clang) or (matches[1] == "نصب خودکار" and Clang)) and not redis:get('ExpireDate:'..msg.to.id) then
+			redis:set('ExpireDate:'..msg.to.id,true)
+			local extime = (tonumber(365) * 86400)
+			redis:setex('ExpireDate:'..msg.to.id, extime, true)
+				if not redis:get('CheckExpire::'..msg.to.id) then
+					redis:set('CheckExpire::'..msg.to.id,true)
+				end
+				local hash = "cmd_lang:"..msg.to.id
+				redis:set(hash, true)
+				local hash = "gp_lang:"..msg.to.id
+				redis:set(hash, true)
+				if lang then
+					tdcli.sendMessage(msg.to.id, msg.id_, 1, '_گروه به مدت 365 روز برای اجرای تنظیمات شارژ میباشد._', 1, 'md')
+				else
+					tdcli.sendMessage(msg.to.id, msg.id_, 1, '_Group charged 365 Day  for settings._', 1, 'md')
+				end
+		end
+		
+		
+if ((matches[1]:lower() == 'fix') or (matches[1] == "فیکس")) then
+local extime = (tonumber(365) * 86400)
+			redis:setex('ExpireDate:'..msg.to.id, extime, true)
+				local hash = "cmd_lang:"..msg.to.id
+				redis:set(hash, true)
+				local hash = "gp_lang:"..msg.to.id
+				redis:set(hash, true)
+				if lang then
+					tdcli.sendMessage(msg.to.id, msg.id_, 1, 'فیکس شد', 1, 'md')
+				else
+					tdcli.sendMessage(msg.to.id, msg.id_, 1, 'Fixed!', 1, 'md')
+				end
+		end
+		
+		
 if is_sudo(msg) then
    		if ((matches[1]:lower() == 'add' and not Clang) or (matches[1] == "افزودن" and Clang)) and not redis:get('ExpireDate:'..msg.to.id) then
 			redis:set('ExpireDate:'..msg.to.id,true)
@@ -1216,7 +1251,7 @@ local bc = matches[2]
 for x,v in pairs(data) do	
 for k,v in pairs(data[tostring(x)]['owners']) do
 	--print("****owner:"..k)		
-tdcli.sendMessage(k, 0, 0, bc.."\n", 0)	
+tdcli.sendMessage(k, 0, 0, bc.."\n", 0, 'html')	
 end		
 end	
 end
@@ -1234,7 +1269,7 @@ if ((matches[1] == 'broadcast' and not Clang) or (matches[1] == "ارسال به
 local data = load_data(_config.moderation.data)		
 local bc = matches[2]			
 for k,v in pairs(data) do				
-tdcli.sendMessage(k, 0, 0, bc, 0)			
+tdcli.sendMessage(k, 0, 0, bc, 0, 'html')			
 end	
 end
 
@@ -1291,6 +1326,7 @@ return chat_list(msg)
 	   tdcli.sendMessage(matches[2], 0, 1, "Admin Joined!🌚", 1, 'html')
     tdcli.addChatMember(matches[2], msg.from.id, 0, dl_cb, nil)
   end
+  
 		if ((matches[1] == 'rem' and not Clang) or (matches[1] == "حذف گروه" and Clang)) and matches[2] and is_admin(msg) then
     local data = load_data(_config.moderation.data)
 			-- Group configuration removal
@@ -1794,8 +1830,10 @@ end
 
 return { 
 patterns = {                                                                   
-"^[!/#](helptools)$", 
+"^[!/#](helptools)$",
+"^[!/#](fix)$", 
 "^[!/#](config)$", 
+"^[!/#](autoadd)$", 
 "^[!/#](visudo)$", 
 "^[!/#](desudo)$",
 "^[!/#](sudolist)$",
@@ -1842,6 +1880,8 @@ patterns = {
 "^[!/#](sendowners)(.*)$",
 "^[!/#](sendowner)+(.*) (-%d+)$",
 	"^(پیکربندی)$",
+	"^(فیکس)$",
+	"^(نصب خودکار)$",
 	"^(افزودن)$",
 	"^(حذف گروه)$",
     "^(حذف گروه) (-%d+)$",	

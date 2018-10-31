@@ -1,4 +1,4 @@
-local function getVector(str)
+--[[local function getVector(str)
   local v = {}
   local i = 1
 
@@ -9,7 +9,7 @@ local function getVector(str)
   v = table.concat(v, ',')
   return load('return {' .. v .. '}')()
 end
-
+]]--
 
 local function pre_process(msg)
    if msg.to.type ~= 'pv' then
